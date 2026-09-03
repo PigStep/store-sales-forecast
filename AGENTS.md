@@ -20,7 +20,7 @@ Models log metrics/params to **MLflow via DagsHub** (`dagshub.init(repo_owner='P
 - Sales data spans 1,115 stores; forecasting horizon is ~6 weeks.
 - `Sales` is the target. Some rows have `Sales == 0` (e.g. stores closed Sundays, some Sunday hours). New/open labeling matters — not all stores are closed Sundays.
 - Preprocessing convention in `EDA.ipynb`: set `Date` as index, `pd.to_datetime`.
-- `Baseline.ipynb` builds features (`create_basic_features`: DayOfWeek, Month, Year, Open, Promo, StateHoliday, etc., `FEAT_COLS`) and adds lag features (`add_lag_features`), then trains `XGBRegressor` with `TimeSeriesSplit` CV. Follow this pattern for new modeling work.
+- `Baseline.ipynb` builds features (`create_basic_features`: Day of month, Month, Year, Week of year, Day of year, Quarter, Is weekend; converts StateHoliday to categorical), assembles them with raw CSV columns (`DayOfWeek`, `Open`, `Promo`, `SchoolHoliday`) into `FEAT_COLS`, adds lag features (`add_lag_features`), then trains `XGBRegressor` with `TimeSeriesSplit` CV. Follow this pattern for new modeling work.
 
 ## Content per notebook
 - `EDA.ipynb` — distribution/seasonality exploration.
